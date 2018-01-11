@@ -10,15 +10,45 @@ for (a, b) in sampleID:
 
 assert len(samples) == len(set(samples))
 
+print samples
 
-famFile = [line.strip() for line in open('../data/ANDI.fam')]
+phenotype = {}
+text = [line.strip() for line in open('../data/ADNIALL.csv')][1:]
+for line in text:
+    items = line.split(',')
+    rid = int(items[2][1:-1])
+    change = items[9][1:-1]
+    if change == '':
+        phe = items[10][1:-1]
+        if phe.strip() != '':
+            phe = int(phe)
+            if phe == 1:
+                phenotype[rid] = 0
+            elif phe == 3:
+                phenotype[rid] = 1
+            # else:
+            #     phenotype[rid] = 2
+    else:
+        change = int(items[9][1:-1])
+        if change == 1:
+            phenotype[rid] = 0
+        elif change == 5 or change == 6:
+            phenotype[rid] = 1
+        # else:
+        #     phenotype[rid] = 2
 
-phenotypes = {}
+print len(phenotype)
+# print '----------'
+sample2pheno = {}
 
-for line in famFile:
-    items = line.split()
-    if items[4] == '2':
-        p = 1
-    elif items[4] == '1':
-        p = 0
-    phenotypes[items[1]] = 0
+for s in samples:
+    sid = int(s.split('_')[-1])
+    # print sid,
+    if sid in phenotype:
+        sample2pheno[s] = phenotype[sid]
+    # else:
+    #     print sid
+
+print len(sample2pheno) # 477
+
+np.save('../result/phenoDic', sample2pheno)
