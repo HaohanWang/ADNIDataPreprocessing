@@ -22,6 +22,8 @@ def generateFinalData():
     phenos = np.array(phenos)
     snps = np.array(snps)
 
+    snps = np.nan_to_num(snps)
+
     print phenos.shape
     print snps.shape
 
