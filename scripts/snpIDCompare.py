@@ -2,7 +2,7 @@ __author__ = 'Haohan Wang'
 
 adids = [line.strip() for line in open('../result/markers.txt')]
 
-daids = [line.strip() for line in open('../drugAbuse/markets_da_ad.txt')]
+daids = [line.strip() for line in open('../drugAbuse/markers.txt')]
 
 addic = {}
 for i in adids:
