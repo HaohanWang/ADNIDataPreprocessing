@@ -25,8 +25,8 @@ def generateFinalData():
     print phenos.shape
     print snps.shape
 
-    np.save('../final/pheno', phenos)
-    np.save('../final/snps', snps)
+    np.save('../final/pheno', phenos.astype(float))
+    np.save('../final/snps', snps.astype(float))
 
 if __name__ == '__main__':
     generateFinalData()
